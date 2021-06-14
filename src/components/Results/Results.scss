@@ -1,0 +1,43 @@
+.table-wrapper {
+  margin-top: 2rem;
+  .avatar {
+    border-radius: 50%;
+  }
+  .results-text {
+    color: #61dafb;
+  }
+  .row-data {
+    text-align: center;
+  }
+  table {
+    border-spacing: 0;
+    border: 1px solid rgb(131, 128, 128);
+    tr {
+      height: 52px;
+      &:last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      min-width: 200px;
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    .page-count {
+      font-size: 12px;
+    }
+  }
+}

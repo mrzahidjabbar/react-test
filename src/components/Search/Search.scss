@@ -1,0 +1,9 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .search-input {
+        width: 41%;
+        height: 25px;
+    }
+}
