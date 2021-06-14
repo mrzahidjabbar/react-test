@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     handleSeacrch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const handleLoginChange = (e) => {
