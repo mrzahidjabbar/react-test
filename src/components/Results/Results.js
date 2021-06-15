@@ -1,11 +1,11 @@
-import React, { useMemo, useEffect } from "react";
-import { useTable } from "react-table";
+import React, { useMemo } from "react";
+import { useTable, useSortBy } from "react-table";
 
 import "./Results.scss";
 
 const Avatar = (url) => (
   <img
-    src={url.values}
+    src={url.value}
     height='auto'
     width='30'
     className='avatar'
@@ -14,27 +14,33 @@ const Avatar = (url) => (
 );
 
 const Results = (props) => {
-  const { results, handleNextPage, handlePreviosPage, handleFirstPage, handleLastPage, currentPage, totalPages } = props;
-  useEffect(() => {
-    console.log({ results });
-  }, [results]);
+  const {
+    results,
+    handleNextPage,
+    handlePreviousPage,
+    handleFirstPage,
+    handleLastPage,
+    currentPage,
+    isLoading,
+    totalPages
+  } = props;
+
   const columns = useMemo(
     () => [
       {
+        Header: "Sr.",
+        accessor: "serial"
+      },
+      {
         Header: "Avatar",
         accessor: "avatar_url",
-        Cell: ({ cell: { value } }) => <Avatar values={value} />
+        disableSortBy: true,
+        Cell: ({ cell: { value } }) => <Avatar value={value} />
       },
       {
         Header: "Login",
         accessor: "login",
-        sortMethod: (a, b) => {
-            console.log('sortMethod')
-            if (a.length === b.length) {
-              return a > b ? 1 : -1;
-            }
-            return a.length > b.length ? 1 : -1;
-          }
+        sortDescFirst: "true"
       },
       {
         Header: "Type",
@@ -44,16 +50,15 @@ const Results = (props) => {
     []
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable(
-    { columns, data: results },
-    
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns,
+        data: results,
+        initialState: { sortBy: [{ id: "login", desc: false }] }
+      },
+      useSortBy
+    );
 
   return (
     <>
@@ -63,8 +68,15 @@ const Results = (props) => {
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
                   </th>
                 ))}
               </tr>
@@ -88,7 +100,7 @@ const Results = (props) => {
           </tbody>
         </table>
         <div className='pagination'>
-          <div className="page-count">
+          <div className='page-count'>
             Page{" "}
             <strong>
               {" "}
@@ -96,18 +108,27 @@ const Results = (props) => {
             </strong>{" "}
           </div>
           <div>
-            <button onClick={() => handleFirstPage()} disabled={currentPage === 1}>
+            <button
+              onClick={() => handleFirstPage()}
+              disabled={currentPage === 1 || isLoading}
+            >
               First
             </button>{" "}
-            <button onClick={() => handlePreviosPage()} disabled={currentPage === 1} >
-              Previos
+            <button
+              onClick={() => handlePreviousPage()}
+              disabled={currentPage === 1 || isLoading}
+            >
+              Previous
             </button>{" "}
-            <button onClick={() => handleNextPage()} disabled={currentPage === totalPages}>
+            <button
+              onClick={() => handleNextPage()}
+              disabled={currentPage === totalPages || isLoading}
+            >
               Next
             </button>{" "}
             <button
               onClick={() => handleLastPage()}
-              disabled={currentPage === totalPages}
+              disabled={currentPage === totalPages || isLoading}
             >
               Last
             </button>

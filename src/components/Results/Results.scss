@@ -27,6 +27,9 @@
       border-bottom: 1px solid black;
       border-right: 1px solid black;
       min-width: 200px;
+      &:first-child {
+        min-width: 50px;
+      }
       &:last-child {
         border-right: 0;
       }
