@@ -8,7 +8,7 @@ const Search = (props) => {
     <>
       <form onSubmit={handleSearch} className="form-wrapper">
         <input type='search' onChange={handleLoginChange} placeholder="Search" className="search-input"/>
-        <input type='submit' value='Search'/>
+        <input type='submit' value='Search' className="search-button"/>
       </form>
     </>
   );

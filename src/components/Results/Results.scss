@@ -1,5 +1,6 @@
 .table-wrapper {
   margin-top: 2rem;
+  background-color: transparent !important;
   .avatar {
     border-radius: 50%;
   }
@@ -12,6 +13,9 @@
   table {
     border-spacing: 0;
     border: 1px solid rgb(131, 128, 128);
+    background-color: #3c3f4e !important;
+    border-radius: 15px;
+    color: white;
     tr {
       height: 52px;
       &:last-child {
@@ -38,9 +42,33 @@
   .pagination {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 10px;
     .page-count {
       font-size: 12px;
+      color: white;
+      margin-left: 5px;
+    }
+    button {
+        padding: 4px 6px;
+        position: relative;
+        border-radius: 4px;
+        border: 1px solid #26BEAF;
+        background: transparent;
+        color: white;
+        cursor: pointer;
+
+        &:disabled {
+          background: #797c8e;
+          cursor: auto;
+        }
+    }
+    .next-page-button {
+      font-size: 16px;
+      padding: 8px 10px;
+    }
+    .pre-page-button {
+      font-size: 16px;
+      padding: 8px 10px;
     }
   }
 }

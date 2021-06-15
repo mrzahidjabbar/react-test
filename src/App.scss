@@ -4,7 +4,7 @@
 }
 
 .app-wrapper {
-  background-color: #fafafa;
+  background-color: #444757;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,4 +13,10 @@
   padding-top: 5%;
   font-size: 14px;
   color: rgb(0, 0, 0);
+  .header-text {
+    color: white;
+  }
+  .no-results-msg {
+    color: white;
+  }
 }

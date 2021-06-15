@@ -81,7 +81,7 @@ function App() {
 
   return (
     <div className='app-wrapper'>
-      <h2>Search to find GitHub Users</h2>
+      <h2 className="header-text">GitHub Search API</h2>
       <Search
         handleLoginChange={handleLoginChange}
         handleSearch={handleSubmit}
@@ -100,7 +100,7 @@ function App() {
           isLoading={isLoading}
         />
       ) : (
-        <p>{(login && search) ? "No results found, please search again!" : ""}</p>
+        <p className="no-results-msg">{(login && search) ? "No results found, please search again!" : ""}</p>
       )}
     </div>
   );
